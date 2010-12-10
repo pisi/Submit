@@ -57,23 +57,20 @@
 					.bind('delete', plugin.after)
 
 			},
-			after: function(e, status, data){
+			after: function(e, status, url){
 
-				if (status== 'success') plugin.get(data);
-				console.log("AFTER", e, e.type, status, data)
-
-			},
-			get: function(url){
-
-				if (plugin.load){
-					var
-						load= plugin.load.split(/ /),
-						target= load[0],
-						fragment= load[1] || load[0]
-					$(target).load(url+' '+fragment);
-				}else{
-					location.href= url;
+				if (status== 'success'){
+					if (plugin.load){
+						var
+							load= plugin.load.split(/ /),
+							target= load[0],
+							fragment= load[1] || load[0]
+						$(target).load(url+' '+fragment);
+					}else{
+						location.href= url;
+					}
 				}
+				// console.log("AFTER", e, e.type, status, data)
 
 			}
 		}
