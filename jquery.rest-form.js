@@ -24,10 +24,12 @@
 				cache: false
 
 			},
-			load: '#flash #flash',
+			load: '#flash',
 			bind_submit: function(){
 
 				$(document).bind('submit', function(e){
+
+					if ($(e.target).is(':not(.REST)')) return;
 
 					var
 						form= e.target,
