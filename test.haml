@@ -1,0 +1,20 @@
+!!!
+%body
+	%head
+		%title REST Form
+		%script{ :src => 'http://code.jquery.com/jquery-latest.js' }
+		%script{ :src => 'jquery.rest-form.js' }
+
+	%body
+		%h1 REST Form Prototype
+
+		#flash= @flash
+
+		-%w{PUT GET POST DELETE}.each do |method|
+			%form{ :action => '/resource', :method => method, :target => '#flash' }
+				%fieldset
+					%legend= method
+					%button Submit
+					%input{ :name => :test_field1, :type => :text, :value => 'test_value' }
+		
+		#result cyxvxv
