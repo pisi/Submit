@@ -1,4 +1,4 @@
-(function($, document){
+jQuery.restfulForm || (function($, document){
 
 	$(function(){
 
@@ -18,44 +18,49 @@
 				cache: false
 
 			},
-			submit: function(e){
+			intercept: function(e){
 
-				if ($(e.target).is('.restful')){
-					var
-						form= e.target,
-						method= form.method.toLowerCase()
+				var
+					form= e.target
 
-					$.ajax( $.extend({}, plugin.ajaxSettings, {
-						url: form.action,
-						type: method,
-						data: $(form).serialize(),
-						complete: function(xhr, status){
-							$(form).trigger(method+'.restful', [form, status, xhr.responseText]);
-						}
-					}))
+				if ($(form).is('.restful')){
+					plugin.submit(form, form.method.toLowerCase())
 					return false
 				}
 
 			},
-			complete: function(e, form, result, url){
+			submit: function(form, method){
 
-				if (result== 'success'){
-					if (form.target.match(/^\#/, function(){
-						console.log("REGEXP")
-					})){
-						var
-							target= form.target.split(/ /)
-						$(target[0]).load(url+' '+(target[1] || target[0]));
+				$.ajax( $.extend({}, plugin.ajaxSettings, {
+					url: form.action,
+					type: method,
+					data: $(form).serialize(),
+					complete: function(xhr, status){
+						$(form).trigger(method, [form, status, xhr.responseText]);
+					}
+				}))
+
+			},
+			getResult: function(e, form, result, url){
+
+				if (result == 'success'){
+					if (form.target.match(/^[#.]/)){
+						form.target.replace(/^(\S+)(|\s(.+))$/,
+							function(target, element, noop, fragment){
+								$(element).load(url+' '+(fragment || element));
+							})
 					}else{
 						location.href= url;
 					}
+				}else{
+					location.href= url;
 				}
 
 			}
 		}
 	
 	$(document)
-		.bind('submit', plugin.submit)
-		.bind('put.restful get.restful post.restful delete.restful', plugin.complete)
+		.bind('submit', plugin.intercept)
+		.bind('put get post delete', plugin.getResult)
 
 })(jQuery, document);
