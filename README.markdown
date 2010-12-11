@@ -49,6 +49,13 @@ will cut-out response's `my_result` DIV and replace it in the current page. To c
 will load contents of response's `my_fragment` DIV into the `my_result` DIV below the form and discard the rest of the response.
 
 
+---
+
+## Open-source, of course!
+
+Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+Copyright (c) 2010 [Petr Vostrel][vostrel]
+
 
 [jquery]:http://jquery.com
 [.load]:http://api.jquery.com/load
@@ -59,3 +66,4 @@ will load contents of response's `my_fragment` DIV into the `my_result` DIV belo
 [safe]:http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Safe_methods
 [idempotent]:http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Idempotent_methods_and_web_applications
 [url]:http://en.wikipedia.org/wiki/URL
+[vostrel]:http://petr.vostrel.cz

@@ -1,3 +1,16 @@
+/**
+ *
+ * RESTful Forms Plug-in for jQuery
+ * ================================
+ * AJAX-powered support for REST methods in HTML forms
+ *
+ * @license RESTful Forms
+ * for jQuery 1.4
+ * (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
+ * under the MIT (MIT-LICENSE.TXT) and GPL (GPL-LICENSE.TXT) licenses.
+ * http://jquery.vostrel.cz/restful-forms
+ */
+
 jQuery.restfulForm || (function($, document){
 
 	var
