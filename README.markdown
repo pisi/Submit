@@ -7,6 +7,7 @@ Classic HTML forms especially fail in supporting [idempotent][idempotent] [metho
 
 Now, thanks to the mighty [jQuery][jquery] and this little plugin, you can use __GET, PUT, POST__ and __DELETE__ easily and equally in your HTML forms. _Restful Forms_ adds special [RESTful][restful] submit treatment to standard HTML `<form>`.
 
+
 ## Classname-based Initialization
 
 No Javascript coding. All you need to do is add `"restful"` class name to your form:
@@ -17,17 +18,19 @@ And you can use whatever method you like, not just POST or GET:
 
 	<form method="PUT" class="restful">
 
-## Events
-
-Right before the actual submit, a method-specific event is triggered on the form itself. You can bind to `"get"`, `"put"`, `"post"` or `"delete"` events the usual way.
-
-	$('form').bind("put", function(event){
-		// Return false to cancel the submit
-	})
 
 ## URL Result
 
 In response to any RESTful form submit, a plain-text [URL][url] (internet address) is expected. This URL needs to be resolvable with GET method. Browser then redirects to that URL.
+
+
+## Events
+
+Arrival of response is announced by `"get"`, `"put"`, `"post"` or `"delete"` event triggered on the form. You can bind to events the usual way.
+
+	$('form').bind("put", function(event){
+		// Return false to cancel the submit
+	})
 
 
 ## Page Fragments
