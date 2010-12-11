@@ -1,4 +1,4 @@
-(function($){
+(function($, document){
 
 	$(function(){
 
@@ -14,63 +14,51 @@
 		jQuery.restForm= {
 			init: function(){
 
-				plugin.bind_submit();
-				plugin.bind_response();
+					$(document)
+						.bind('submit', plugin.on_submit)
+
+						.bind('put', plugin.on_complete)
+						.bind('get', plugin.on_complete)
+						.bind('post', plugin.on_complete)
+						.bind('delete', plugin.on_complete)
 
 			},
-			ajax: {
+			ajaxSettings: {
 
 				async: false,
 				cache: false
 
 			},
-			load: '#flash',
-			bind_submit: function(){
+			on_submit: function(e){
 
-				$(document).bind('submit', function(e){
-
-					if ($(e.target).is(':not(.REST)')) return;
-
+				if ($(e.target).is('.REST')){
 					var
 						form= e.target,
 						method= form.method.toLowerCase()
-						
-					$.ajax( $.extend({}, plugin.ajax, {
+
+					$.ajax( $.extend({}, plugin.ajaxSettings, {
 						url: form.action,
 						type: method,
 						data: $(form).serialize(),
 						complete: function(xhr, status){
-							$(form).trigger(method, [status, xhr.responseText]);
+							$(form).trigger(method, [form, status, xhr.responseText]);
 						}
 					}))
 					return false
-
-				})
-
-			},
-			bind_response: function(){
-
-				$(document)
-					.bind('put', plugin.after)
-					.bind('get', plugin.after)
-					.bind('post', plugin.after)
-					.bind('delete', plugin.after)
+				}
 
 			},
-			after: function(e, status, url){
+			on_complete: function(e, form, status, url){
 
 				if (status== 'success'){
-					if (plugin.load){
+					if (form.target.match(/^\#/)){
 						var
-							load= plugin.load.split(/ /),
-							target= load[0],
-							fragment= load[1] || load[0]
-						$(target).load(url+' '+fragment);
+							target= form.target.split(/ /)
+						$(target[0]).load(url+' '+(target[1] || target[0]));
 					}else{
 						location.href= url;
 					}
 				}
-				// console.log("AFTER", e, e.type, status, data)
 
 			}
 		}
@@ -78,4 +66,4 @@
 	plugin.init();
 
 
-})(jQuery);
+})(jQuery, document);
