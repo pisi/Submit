@@ -11,7 +11,7 @@
 		#flash= @flash
 
 		-%w{PUT GET POST DELETE}.each do |method|
-			%form.REST{ :action => '/resource', :method => method, :target => '#flash' }
+			%form.restful{ :action => '/resource', :method => method, :target => '#flash' }
 				%fieldset
 					%legend= method
 					%button Submit

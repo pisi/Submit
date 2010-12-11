@@ -11,27 +11,16 @@
 	
 	var
 		plugin=
-		jQuery.restForm= {
-			init: function(){
-
-					$(document)
-						.bind('submit', plugin.on_submit)
-
-						.bind('put', plugin.on_complete)
-						.bind('get', plugin.on_complete)
-						.bind('post', plugin.on_complete)
-						.bind('delete', plugin.on_complete)
-
-			},
+		jQuery.restfulForm= {
 			ajaxSettings: {
 
 				async: false,
 				cache: false
 
 			},
-			on_submit: function(e){
+			submit: function(e){
 
-				if ($(e.target).is('.REST')){
+				if ($(e.target).is('.restful')){
 					var
 						form= e.target,
 						method= form.method.toLowerCase()
@@ -41,17 +30,19 @@
 						type: method,
 						data: $(form).serialize(),
 						complete: function(xhr, status){
-							$(form).trigger(method, [form, status, xhr.responseText]);
+							$(form).trigger(method+'.restful', [form, status, xhr.responseText]);
 						}
 					}))
 					return false
 				}
 
 			},
-			on_complete: function(e, form, status, url){
+			complete: function(e, form, result, url){
 
-				if (status== 'success'){
-					if (form.target.match(/^\#/)){
+				if (result== 'success'){
+					if (form.target.match(/^\#/, function(){
+						console.log("REGEXP")
+					})){
 						var
 							target= form.target.split(/ /)
 						$(target[0]).load(url+' '+(target[1] || target[0]));
@@ -63,7 +54,8 @@
 			}
 		}
 	
-	plugin.init();
-
+	$(document)
+		.bind('submit', plugin.submit)
+		.bind('put.restful get.restful post.restful delete.restful', plugin.complete)
 
 })(jQuery, document);
