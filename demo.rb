@@ -19,12 +19,12 @@ get '/' do
   @README= Markdown.new(File.read('README.markdown'))
   @flash= flash[:notice]
   content_type :html
-  haml :test
+  haml :demo
 end
 
 get '/style.css' do
   content_type :css
-  sass :test
+  sass :demo
 end
 
 def report_success method, params

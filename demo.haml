@@ -3,7 +3,7 @@
 	%head
 		%title Restful Form
 		%script{ :src => 'http://code.jquery.com/jquery-latest.js' }
-		%script{ :src => 'source/jquery.rest-form.js' }
+		%script{ :src => 'jquery.restful-form-min.js' }
 		%link{ :href => 'style.css', :rel => 'stylesheet' }
 
 	%body
@@ -13,7 +13,7 @@
 		#methods
 			-%w{PUT GET POST DELETE}.each do |method|
 				%fieldset
-					%legend= "#{method}"
+					%legend= "&lt;form method=\"#{method}\"&gt;"
 					%form{ :action => '/path', :method => method }
 						%button Submit
 					%form.restful{ :action => '/resource', :method => method }

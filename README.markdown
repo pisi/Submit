@@ -1,13 +1,15 @@
-Restful Forms Plug-in For jQuery
-===============================
+# W-I-P
 
-Classic HTML forms especially fail in supporting [idempotent][idempotent] PUT and DELETE [methods][method] and often only fail-[safe][safe] to GET. So far, this sort of stays in between us and natural [REST][rest] / [CRUD][crud] implementations.
+RESTful Forms Plug-in For jQuery
+================================
+
+Classic HTML forms especially fail in supporting [idempotent][idempotent] [methods][method] PUT and DELETE and often only fail-[safe][safe] to GET. So far, this sort of stays in between us and natural [REST][rest] / [CRUD][crud] implementations.
 
 Now, thanks to the mighty [jQuery][jquery] and this little plugin, you can use __GET, PUT, POST__ and __DELETE__ easily and equally in your HTML forms. _Restful Forms_ adds special [RESTful][restful] submit treatment to standard HTML `<form>`.
 
 ## Classname-based Initialization
 
-All you need to do is add `"restful"` class name to your form:
+No Javascript coding. All you need to do is add `"restful"` class name to your form:
 
 	<form class="restful">
 
