@@ -35,6 +35,23 @@ delete '/resource' do
   report_success :delete, params
 end
 
+put '/path' do
+  report_success :put, params
+  redirect '/'
+end
+get '/path' do
+  report_success :get, params
+  redirect '/'
+end
+post '/path' do
+  report_success :post, params
+  redirect '/'
+end
+delete '/path' do
+  report_success :delete, params
+  redirect '/'
+end
+
 def report_success method, params
   flash[:notice]= "Form had been successfully submitted using the #{method.to_s.upcase} method (#{params})"
   '/'
