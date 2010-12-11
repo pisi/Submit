@@ -1,14 +1,5 @@
 jQuery.restfulForm || (function($, document){
 
-	$(function(){
-
-		$('form').bind('put', function(e, status, data){
-			console.log("PUT", this, e, status, data)
-			// return false;
-		})
-
-	});
-	
 	var
 		plugin=
 		jQuery.restfulForm= {
@@ -41,26 +32,37 @@ jQuery.restfulForm || (function($, document){
 				}))
 
 			},
-			getResult: function(e, form, result, url){
+			display: function(e, form, result, url){
 
-				if (result == 'success'){
-					if (form.target.match(/^[#.]/)){
-						form.target.replace(/^(\S+)(|\s(.+))$/,
-							function(target, element, noop, fragment){
-								$(element).load(url+' '+(fragment || element));
-							})
-					}else{
-						location.href= url;
-					}
-				}else{
-					location.href= url;
-				}
+				result == 'success'
+				&& form.target.match(/^[#.]/)
+					&& form.target.replace(/^(\S+)(|\s(.+))$/,
+						function(target, element, noop, fragment){
+							$(element).load(url+' '+(fragment || element));
+						})
+					|| plugin.redirect(url)
+				|| plugin.redirect(url)
+
+			},
+			redirect: function(url){
+
+				return location.href= url
 
 			}
 		}
 	
 	$(document)
 		.bind('submit', plugin.intercept)
-		.bind('put get post delete', plugin.getResult)
+		.bind('put get post delete', plugin.display)
 
 })(jQuery, document);
+
+$(function(){
+
+	$('form').bind('put', function(e, status, data){
+		console.log("PUT", this, e, status, data)
+		// return false;
+	})
+
+});
+
