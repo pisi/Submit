@@ -22,6 +22,16 @@ get '/' do
   haml :test
 end
 
+get '/style.css' do
+  content_type :css
+  sass :test
+end
+
+def report_success method, params
+  flash[:notice]= "Form had been successfully submitted using the #{method.to_s.upcase} method (#{params})"
+  '/'
+end
+
 put '/resource' do
   report_success :put, params
 end
@@ -52,12 +62,3 @@ delete '/path' do
   redirect '/'
 end
 
-def report_success method, params
-  flash[:notice]= "Form had been successfully submitted using the #{method.to_s.upcase} method (#{params})"
-  '/'
-end
-
-get '/style.css' do
-  content_type :css
-  sass :test
-end

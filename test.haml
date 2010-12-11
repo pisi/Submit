@@ -1,20 +1,31 @@
 !!!
 %body
 	%head
-		%title REST Form
+		%title Restful Form
 		%script{ :src => 'http://code.jquery.com/jquery-latest.js' }
 		%script{ :src => 'jquery.rest-form.js' }
+		%link{ :href => 'style.css', :rel => 'stylesheet' }
 
 	%body
-		%h1 REST Form Prototype
 
 		#flash= @flash
 
-		-%w{PUT GET POST DELETE}.each do |method|
-			%form.restful{ :action => '/resource', :method => method, :target => '#flash' }
+		#methods
+			-%w{PUT GET POST DELETE}.each do |method|
 				%fieldset
-					%legend= method
-					%button Submit
-					%input{ :name => :test_field1, :type => :text, :value => 'test_value' }
-		
-		#result cyxvxv
+					%legend= "#{method}"
+					%form{ :action => '/path', :method => method }
+						%button Submit
+					%form.restful{ :action => '/resource', :method => method }
+						%button RESTful Submit
+					%form.restful{ :action => '/resource', :method => method, :target => '#flash' }
+						%button RESTful Submit &amp; Load
+			.clearfix
+
+		%fieldset
+			%legend= "With fields"
+			%form.restful{ :action => '/resource', :method => :put }
+				%input{ :name => :test_field1, :type => :text, :value => 'test_value' }
+				%button Submit
+
+		#readme= @README.to_html
