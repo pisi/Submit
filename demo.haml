@@ -11,17 +11,20 @@
 		#flash= @flash
 
 		#methods
-			-%w{PUT GET POST DELETE}.each do |method|
+			-%w{GET POST PUT DELETE}.each do |method|
 				%fieldset
 					%legend= "&lt;form method=\"#{method}\"&gt;"
 					%form{ :action => '/path', :method => method }
 						%button Submit
 					%form.restful{ :action => '/resource', :method => method }
 						%button RESTful Submit
-					%form.restful{ :action => '/resource', :method => method, :target => '#flash' }
+					%form.restful{ :action => '/resource', :method => method, :target => 'my_frame' }
+						%button RESTful Submit to Frame
+					%form.restful{ :action => '/resource', :method => method, :target => '#flash < #flash' }
 						%button RESTful Submit &amp; Load
 			.clearfix
 
+		%iframe{ :name => 'my_frame' }
 		%fieldset
 			%legend= "With fields"
 			%form.restful{ :action => '/resource', :method => :put }

@@ -34,27 +34,26 @@ jQuery.restfulForm || (function($, document){
 			},
 			display: function(e, form, result, url){
 
-				if (result == 'success'){
-					if (form.target.match(/^[#.]/)) plugin.load(url, form)
-					else plugin.redirect(url)
-				}else{
-					plugin.redirect(url)
-				}
+				plugin.load(url, form, form.target)
+				|| plugin.redirect(url, form.target)
 
 			},
-			load: function(url, form){
+			load: function(url, form, target){
 
-				form.target.replace(/^(\S+)(|\s(.+))$/,
-					function(target, element, noop, fragment){
-						$(element).load(url+' '+(fragment || element));
+				return target.replace(plugin.TARGET_PATTERN,
+					function(whole, element, partial, fragment){
+						return $(element).load(fragment ? url+' '+fragment : url)
+							.length || ''
 					})
 
 			},
-			redirect: function(url){
+			redirect: function(url, target){
 
-				location.href= url
+				try{ window.top[target].location.href= url }
+				catch(e){ location.href= url }
 
-			}
+			},
+			TARGET_PATTERN: /^([^<]+)(|\s*<\s*(.+))$/
 		}
 	
 	$(document)

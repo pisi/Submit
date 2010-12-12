@@ -1,4 +1,4 @@
-# W-I-P
+__`work-in-progress`__
 
 RESTful Forms Plug-in For jQuery
 ================================
@@ -10,7 +10,7 @@ Now, thanks to the mighty [jQuery][jquery] and this little plugin, you can use _
 
 ## Classname-based Initialization
 
-No Javascript coding. All you need to do is add `"restful"` class name to your form:
+No Javascript. All you need to do is add `"restful"` class name to your `<form>`:
 
 	<form class="restful">
 
@@ -21,7 +21,7 @@ And you can use whatever method you like, not just POST or GET:
 
 ## URL Result
 
-In response to any RESTful form submit, a plain-text [URL][url] (internet address) is expected. This URL needs to be resolvable with GET method. Browser then redirects to that URL.
+In response to any _Restful Forms_ submit, both success and error, a plain-text [URL][url] is expected. This URL needs to be resolvable with GET method. Browser then redirects to that URL.
 
 
 ## Events
@@ -33,20 +33,27 @@ Arrival of response is announced by `"get"`, `"put"`, `"post"` or `"delete"` eve
 	})
 
 
-## Page Fragments
+## Added Bonus
 
-Eventually you can easily load just a page fragment in response to the form submit. To do that you want to use `<form>`'s `target` attribute as a jQuery selector of the accepting DOM element.
+### Submit Without Leaving
 
-For example, the form below submits into the DIV element below it - the resulting GET URL gets loaded there):
+You can very easily submit into a DOM element without ever leaving the current page. _Restful forms_ will utilize _jQuery_'s [`.load()`][.load] method to load the URL into whatever matches _jQuery_ selector specified in `<form>`'s `target` attribute.
 
-	<form target="#my_result" method="PUT" class="restful"></form>
-	<div id="my_result"></div>
+	<form target="#result" method="PUT" class="restful"></form>
 
-will cut-out response's `my_result` DIV and replace it in the current page. To cut-out different element use similar approach like when using regular [`.load()`][.load]: If one or more space characters are included in the string, the portion of the string following the first space is assumed to be a jQuery selector that determines the content to be loaded:
+will submit the form, load the result and render it inside element `#result` with ID of "result".
 
-	<form target="#my_result #my_fragment" method="PUT" class="restful"></form>
 
-will load contents of response's `my_fragment` DIV into the `my_result` DIV below the form and discard the rest of the response.
+### Page Fragments
+
+Equally simply you can load only a portion of the response document. By extending the `target` attribute with ` < ` followed by another _jQuery_ selector. The second one is supplied to [`.load()`][.load] as the "after the space" selector.
+
+	<form target="#result < #section" method="PUT" class="restful"></form>
+
+will cut-out contents of element with ID of "section" from the response and render it in `#result"`
+
+
+
 
 
 
