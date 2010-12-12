@@ -11,11 +11,11 @@
  * http://jquery.vostrel.cz/restful-forms
  */
 
-jQuery.restfulForm || (function($, document){
+jQuery.restfulForms || (function($, document){
 
 	var
 		plugin=
-		jQuery.restfulForm= {
+		jQuery.restfulForms= {
 			ajaxSettings: {
 
 				async: false,
