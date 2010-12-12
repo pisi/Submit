@@ -74,13 +74,3 @@ jQuery.restfulForms || (function($, document){
 		.bind('put get post delete', plugin.display)
 
 })(jQuery, document);
-
-$(function(){
-
-	$('form').bind('put', function(e, status, data){
-		console.log("PUT", this, e, status, data)
-		// return false;
-	})
-
-});
-
