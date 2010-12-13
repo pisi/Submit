@@ -31,6 +31,7 @@ configure :production do
   set :script_resource, '../jquery.restful-forms.js'
 end
 get "/jquery.restful-forms.js" do
+  content_type :js
   File.read(options.script_resource)
 end
 
@@ -46,15 +47,19 @@ def report_success method, params
 end
 
 put '/resource' do
+  content_type :text
   report_success :put, params
 end
 get '/resource' do
+  content_type :text
   report_success :get, params
 end
 post '/resource' do
+  content_type :text
   report_success :post, params
 end
 delete '/resource' do
+  content_type :text
   report_success :delete, params
 end
 
