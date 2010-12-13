@@ -25,45 +25,41 @@ jQuery.restfulForms || (function($, document){
 			intercept: function(e){
 
 				var
-					form= e.target
+					form= e.target,
+					method= form.method.toLowerCase()
 
 				if ($(form).is('.restful')){
-					plugin.submit(form, form.method.toLowerCase())
+					$(form).trigger(method+'-submit', [form, method]);
 					return false
 				}
 
 			},
-			submit: function(form, method){
+			submit: function(e, form, method){
 
 				$.ajax( $.extend({}, plugin.ajaxSettings, {
 					url: form.action,
 					type: method,
 					data: $(form).serialize(),
 					complete: function(xhr, status){
-						$(form).trigger(method, [form, status, xhr.responseText]);
+						$(form).trigger(method, [form, xhr.responseText, form.target, status]);
 					}
 				}))
 
 			},
-			display: function(e, form, result, url){
+			load: function(e, form, url, target){
 
-				plugin.load(url, form, form.target)
-				|| plugin.redirect(url, form.target)
-
-			},
-			load: function(url, form, target){
-
-				return target.replace(plugin.TARGET_PATTERN,
+				if (target.replace(plugin.TARGET_PATTERN,
 					function(whole, element, partial, fragment){
 						return $(element).load(fragment ? url+' '+fragment : url)
 							.length || ''
-					})
+					}))
+					e.stopImmediatePropagation();
 
 			},
-			redirect: function(url, target){
+			redirect: function(e, form, url, target){
 
 				try{ window.top[target].location.href= url }
-				catch(e){ location.href= url }
+				catch(e){ window.location.href= url }
 
 			},
 			TARGET_PATTERN: /^([^<]+)(|\s*<\s*(.+))$/
@@ -71,6 +67,8 @@ jQuery.restfulForms || (function($, document){
 	
 	$(document)
 		.bind('submit', plugin.intercept)
-		.bind('put get post delete', plugin.display)
+		.bind('put-submit get-submit post-submit delete-submit', plugin.submit)
+		.bind('put get post delete', plugin.load)
+		.bind('put get post delete', plugin.redirect)
 
 })(jQuery, document);

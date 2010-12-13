@@ -26,20 +26,22 @@ And use whatever method you like:
 	<form method="PUT" class="restful">
 
 
-## URL Result
+## URL in Result
 
 In response to any _Restful Forms_ submit, both success and error, a plain-text _response [URL][url]_ is expected. This URL needs to be resolvable with GET. Browser automatically redirects to the _response URL_.
 
 
 ## Events
 
-Arrival of response is announced by `"get"`, `"put"`, `"post"` or `"delete"` event triggered on the `<form>`. You can bind to events the usual way.
+_Restful Forms_ are event-driven. That means important moments are announced through the _jQuery_ Event Model and can be listen to.
 
-	$('form').bind("put", function(event){
-		// Return false to cancel the submit
-	})
+Prior to the actual submit a `"get-submit"`, `"post-submit"`, `"put-submit"` or `"delete-submit"` event is triggered on the `<form>`. [Bind][.bind] to these events the usual way. Handler will accept `form` and `method` attributes. You can return boolean _false_ from the handler to prevent the form from being submitted.
 
-__TODO Add `before*` events as a way to prevent submit__
+	$('form').bind("pre-put", function(event, form, method){
+		return false;
+	});
+
+Similarly, after completion `"get"`, `"post"`, `"put"` or `"delete"` event is triggered on the `<form>` right before _Restful Forms_ either redirect or load the _response URL_. Handler will accept `form`, `result` and `url` attributes. Return _false_ to prevent it from happening if you want to handle the response by yourself.
 
 
 ## * Added Bonus
@@ -86,6 +88,7 @@ Copyright (c) 2010 [Petr Vostrel][vostrel]
 
 [jquery]:http://jquery.com
 [.load]:http://api.jquery.com/load
+[.bind]:http://api.jquery.com/bind
 [crud]:http://en.wikipedia.org/wiki/Create,_read,_update_and_delete
 [rest]:http://en.wikipedia.org/wiki/Representational_State_Transfer
 [restful]:http://en.wikipedia.org/wiki/Restful
