@@ -16,11 +16,24 @@ before do
 end
 
 get '/' do
-  @README= Markdown.new(File.read('README.markdown'))
+  @README= Markdown.new(File.read('../README.markdown'))
   @flash= flash[:notice]
   content_type :html
   haml :demo
 end
+
+
+@SCRIPT_NAME= 'jquery.restful-forms.js'
+configure :development do
+  set :script_resource, '../source/jquery.restful-forms.js'
+end
+configure :production do
+  set :script_resource, '../jquery.restful-forms.js'
+end
+get "/jquery.restful-forms.js" do
+  File.read(options.script_resource)
+end
+
 
 get '/style.css' do
   content_type :css
