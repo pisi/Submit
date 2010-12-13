@@ -1,6 +1,6 @@
 /*
  RESTful Forms
- for jQuery 1.4
+ for jQuery 1.3+
  (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
  under the MIT (MIT-LICENSE.TXT) and GPL (GPL-LICENSE.TXT) licenses.
  http://jquery.vostrel.cz/restful-forms

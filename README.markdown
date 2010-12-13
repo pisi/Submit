@@ -1,19 +1,21 @@
 __`work-in-progress`__
 
-_RESTful Forms_ [v0.3][version]
+_RESTful Forms_ [v0.4][version]
 ===============================
-[Plug-in for jQuery][plugin]
+[Plug-in for jQuery][plugin] 1.3 or higher
 
-Classic HTML forms especially fail in supporting for `PUT` and `DELETE` [HTTP methods][method] and often simply downgrade to [safe][safe] `GET`. So far, this sort of stays in between us and natural [REST][rest] / [CRUD][crud] implementations.
+Classic HTML forms lack support for `PUT` and `DELETE` [HTTP methods][method] and often simply downgrade to [safe][safe] `GET`. So far, this sort of stays in between us and natural [REST][rest] / [CRUD][crud] implementations.
 
-Now, thanks to Filip, mighty [jQuery][jquery] and this little plugin, you can use `GET`, `PUT`, `POST` and `DELETE` easily and equally in your HTML forms. _Restful Forms_ add a proper [RESTful][restful] submit treatment to standard HTML `<form>` tags.
+Now, thanks to friend Filip, mighty [jQuery][jquery] and this little plugin, you can use `GET`, `PUT`, `POST` and `DELETE` easily and equally in your HTML forms. _Restful Forms_ add a proper [RESTful][restful] submit treatment to standard HTML `<form>` tags.
 
+---
 
 `jquery.restful-forms`
-[-min.js][mini] (0.989 kb),
-[.js][source] (1.762 kb)
+[-min.js][mini] (1.074 kb),
+[.js][source] (1.724 kb)
 or the entire [.zip][zip]
 
+---
 
 ## Classname-based Initialization
 
@@ -77,10 +79,10 @@ Copyright (c) 2010 [Petr Vostrel][vostrel]
 
 
 
-[version]:http://github.com/pisi/RestfulForms/tree/v0.3
-[source]:http://github.com/pisi/RestfulForms/tree/v0.3/source/jquery.restful-forms.js
-[mini]:http://github.com/pisi/RestfulForms/tree/v0.3/jquery.restful.js
-[zip]:https://github.com/pisi/RestfulForms/archives/v0.3
+[version]:http://github.com/pisi/RestfulForms/tree/v0.4
+[source]:http://github.com/pisi/RestfulForms/tree/v0.4/source/jquery.restful-forms.js
+[mini]:http://github.com/pisi/RestfulForms/tree/v0.4/jquery.restful.js
+[zip]:https://github.com/pisi/RestfulForms/archives/v0.4
 
 [gpl]:https://github.com/pisi/RestfulForms/raw/master/GPL-LICENSE.txt
 [mit]:https://github.com/pisi/RestfulForms/raw/master/MIT-LICENSE.txt
