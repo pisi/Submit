@@ -23,14 +23,14 @@ get '/' do
 end
 
 
-@SCRIPT_NAME= 'jquery.restful-forms.js'
+@SCRIPT_NAME= 'jquery.submit.js'
 configure :development do
-  set :script_resource, '../source/jquery.restful-forms.js'
+  set :script_resource, '../source/jquery.submit.js'
 end
 configure :production do
-  set :script_resource, '../jquery.restful-forms.js'
+  set :script_resource, '../jquery.submit.js'
 end
-get "/jquery.restful-forms.js" do
+get "/jquery.submit.js" do
   content_type :js
   File.read(options.script_resource)
 end

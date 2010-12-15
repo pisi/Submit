@@ -1,58 +1,44 @@
 __`work-in-progress`__
 
-_RESTful Forms_ [v0.4][version]
-===============================
+___Submit___ [v0.4][version]
+========================
 [Plug-in for jQuery][plugin] 1.3 or higher
 
-Classic HTML forms lack support for `PUT` and `DELETE` [HTTP methods][method] and often simply downgrade to [safe][safe] `GET`. So far, this sort of stays in between us and natural [REST][rest] / [CRUD][crud] implementations.
+HTML forms lack support for `PUT` and `DELETE` [idempotent][idempotent] [HTTP methods][method] and browsers often simply downgrade to [safe][safe] `GET`. An unpleasant aspect of going [CRUD][crud]e and [REST][rest]ful.
 
-Now, thanks to friend Filip, mighty [jQuery][jquery] and this little plugin, you can use `GET`, `PUT`, `POST` and `DELETE` easily and equally in your HTML forms. _Restful Forms_ add a proper [RESTful][restful] submit treatment to standard HTML `<form>` tags.
+___Submit___ aims to bridge this gap by performing the `<form>` submit via _[jQuery][jquery]_'s reliant [AJAX][.ajax] implementation. Thus handling methods properly and preventing the browser from downgrading at the same time. ___Submit___ is eventful and super thin (1k!). Ideal for [RESTful][restful] applications.
 
----
+### Download:
 
-`jquery.restful-forms`
-[-min.js][mini] (1.074 kb),
-[.js][source] (1.724 kb)
+`jquery.submit`
+[-min.js][mini] (1.069 kb),
+[.js][source] (1.703 kb)
 or the entire [.zip][zip]
 
 ---
 
 ## Classname-based Initialization
 
-No Javascript. Just add `"restful"` class name to your `<form>`:
+No Javascript. Just add `"jquery-submit"` `class` to your `<form>` and use any `method` you like (even `PUT` or `DELETE`):
 
-	<form class="restful">
-
-And use whatever method you like:
-
-	<form method="PUT" class="restful">
+	<form class="jquery-submit" method="PUT">
 
 
 ## URL in Result
 
-In response to any _Restful Forms_ submit, both success and error, a plain-text _response [URL][url]_ is expected. This URL needs to be resolvable with GET. Browser automatically redirects to the _response URL_.
+Unlike classic form submission, you don't get your response from the server directly. Instead you always get another [URL][url] address. In response to any submit, both success and error, a plain-text _response URL_ is expected. This URL needs to be resolvable with `GET`. Browser then automatically redirects to the _response URL_.
 
 
-## Events
-
-_Restful Forms_ are event-driven. That means important moments are announced through the _jQuery_ Event Model and can be listen to.
-
-Prior to the actual submit a `"get-submit"`, `"post-submit"`, `"put-submit"` or `"delete-submit"` event is triggered on the `<form>`. [Bind][.bind] to these events the usual way. Handler will accept `form` and `method` attributes. You can return boolean _false_ from the handler to prevent the form from being submitted.
-
-	$('form').bind("pre-put", function(event, form, method){
-		return false;
-	});
-
-Similarly, after completion `"get"`, `"post"`, `"put"` or `"delete"` event is triggered on the `<form>` right before _Restful Forms_ either redirect or load the _response URL_. Handler will accept `form`, `result` and `url` attributes. Return _false_ to prevent it from happening if you want to handle the response by yourself.
 
 
-## * Added Bonus
+
+## + Bonus
 
 ### Submit Without Leaving
 
-You can very easily submit into a [DOM][dom] element __without__ leaving the current page. _Restful Forms_ will utilize _jQuery_'s [`.load()`][.load] method to load the URL into whatever matches _jQuery_ selector specified in `<form>`'s `target` attribute.
+You can very easily submit into a [DOM][dom] element __without__ leaving the current page. ___Submit___ will utilize _jQuery_'s [`.load()`][.load] method to load the URL into whatever matches _jQuery_ selector specified in `<form>`'s `target` attribute.
 
-	<form target="#result" method="PUT" class="restful"></form>
+	<form target="#result" class="jquery-submit" method="PUT">
 
 will submit the form, load the result and render it inside DOM element `#result`.
 
@@ -61,9 +47,22 @@ will submit the form, load the result and render it inside DOM element `#result`
 
 Equally simply you can load only a portion of the response document. By extending the `target` attribute with ` < ` followed by another _jQuery_ selector. The second one is supplied to [`.load()`][.load] as the "after the space" selector.
 
-	<form target="#result < #section" method="PUT" class="restful"></form>
+	<form target="#result < #section" class="jquery-submit" method="PUT">
 
-will cut-out contents of element #section in the response and render it inside `#result"`.
+will cut-out contents of element `#section` in the response and render it inside `#result`.
+
+
+## Events
+
+___Submit___ is event-driven and important moments are announced via the _jQuery_ Event Model and can be listen to.
+
+Prior to the actual form submit a `"get-submit"`, `"post-submit"`, `"put-submit"` or `"delete-submit"` event is triggered on the `<form>`. [Bind][.bind] to these events the usual way. Handler will accept `form` and `method` attributes. You can return boolean _false_ from the handler to prevent the form from being submitted.
+
+	$('form').bind("put-submit", function(event, form, method){
+		return false;
+	});
+
+Similarly, after completion `"get"`, `"post"`, `"put"` or `"delete"` event is triggered on the `<form>` right before ___Submit___ either redirects or loads the _response URL_. Handler will accept `form`, `result` and `url` attributes. Return _false_ to prevent it from happening if you want to handle the response by yourself.
 
 
 ---
@@ -79,18 +78,19 @@ Copyright (c) 2010 [Petr Vostrel][vostrel]
 
 
 
-[version]:http://github.com/pisi/RestfulForms/tree/v0.4
-[source]:https://github.com/pisi/RestfulForms/raw/v0.4/source/jquery.restful-forms.js
-[mini]:https://github.com/pisi/RestfulForms/raw/v0.4/jquery.restful-forms.js
-[zip]:https://github.com/pisi/RestfulForms/archives/v0.4
+[version]:http://github.com/pisi/Submit/tree/v0.4
+[source]:https://github.com/pisi/Submit/raw/v0.4/source/jquery.submit.js
+[mini]:https://github.com/pisi/Submit/raw/v0.4/jquery.submit.js
+[zip]:https://github.com/pisi/Submit/archives/v0.4
 
-[gpl]:https://github.com/pisi/RestfulForms/raw/master/GPL-LICENSE.txt
-[mit]:https://github.com/pisi/RestfulForms/raw/master/MIT-LICENSE.txt
-[forkme]:http://github.com/pisi/RestfulForms
+[gpl]:https://github.com/pisi/Submit/raw/master/GPL-LICENSE.txt
+[mit]:https://github.com/pisi/Submit/raw/master/MIT-LICENSE.txt
+[forkme]:http://github.com/pisi/Submit
 
 [jquery]:http://jquery.com
 [.load]:http://api.jquery.com/load
 [.bind]:http://api.jquery.com/bind
+[.ajax]:http://api.jquery.com/jQuery.ajax/
 [crud]:http://en.wikipedia.org/wiki/Create,_read,_update_and_delete
 [rest]:http://en.wikipedia.org/wiki/Representational_State_Transfer
 [restful]:http://en.wikipedia.org/wiki/Restful

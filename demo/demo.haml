@@ -1,9 +1,9 @@
 !!!
 %body
 	%head
-		%title Restful Form
+		%title jQuery Submit Demo
 		%script{ :src => 'http://code.jquery.com/jquery-latest.js' }
-		%script{ :src => '/jquery.restful-forms.js' }
+		%script{ :src => '/jquery.submit.js' }
 		%script{ :src => '/demo.js' }
 		%link{ :href => '/style.css', :rel => 'stylesheet' }
 
@@ -17,19 +17,19 @@
 					%legend= "&lt;form method=\"#{method}\"&gt;"
 					%form{ :action => '/path', :method => method }
 						%button Submit
-					%form.restful{ :action => '/resource', :method => method }
-						%button RESTful Submit
-					%form.restful{ :action => '/resource', :method => method, :target => 'my_frame' }
-						%button RESTful Submit to Frame
-					%form.restful{ :action => '/resource', :method => method, :target => '#flash < #flash' }
-						%button RESTful Submit &amp; Load
+					%form.jquery-submit{ :action => '/resource', :method => method }
+						%button jQuery Submit
+					%form.jquery-submit{ :action => '/resource', :method => method, :target => 'my_frame' }
+						%button jQuery Submit to Frame
+					%form.jquery-submit{ :action => '/resource', :method => method, :target => '#flash < #flash' }
+						%button jQuery Submit &amp; Load
 			.clearfix
 
 		%iframe{ :name => 'my_frame' }
 		%fieldset
 			%legend= "With fields"
-			%form.restful{ :action => '/resource', :method => :put }
+			%form.jquery-submit{ :action => '/resource', :method => :put }
 				%input{ :name => :test_field1, :type => :text, :value => 'test_value' }
-				%button Submit
+				%button jQuery Submit
 
 		#readme= @README.to_html

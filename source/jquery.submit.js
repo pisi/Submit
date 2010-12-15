@@ -1,21 +1,21 @@
 /**
  *
- * RESTful Forms Plug-in for jQuery
- * ================================
- * Proper RESTful submit treatment for HTML <form> tags.
+ * Submit Plug-in for jQuery
+ * =========================
+ * Better submit treatment for HTML <form> tags.
  *
- * @license RESTful Forms
+ * @license Submit
  * for jQuery 1.3+
  * (c) 2010 Petr Vostrel (http://petr.vostrel.cz/)
  * under the MIT (MIT-LICENSE.TXT) and GPL (GPL-LICENSE.TXT) licenses.
- * http://jquery.vostrel.cz/restful-forms
+ * http://jquery.vostrel.cz/submit
  */
 
-jQuery.restfulForms || (function($, document){
+jQuery.submit || (function($, document){
 
 	var
 		plugin=
-		jQuery.restfulForms= {
+		jQuery.submit= {
 			ajaxSettings: {
 
 				async: false,
@@ -28,7 +28,7 @@ jQuery.restfulForms || (function($, document){
 					form= e.target,
 					method= form.method.toLowerCase()
 
-				if ($(form).is('.restful')){
+				if ($(form).is('.jquery-submit')){
 					$(form).trigger(method+'-submit', [form, method]);
 					return false
 				}
