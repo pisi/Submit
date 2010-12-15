@@ -1,7 +1,7 @@
 __`work-in-progress`__
 
-___Submit___ [v0.4][version]
-========================
+___Submit___ [v0.5][version]
+============================
 [Plug-in for jQuery][plugin] 1.3 or higher
 
 HTML forms lack support for `PUT` and `DELETE` [idempotent][idempotent] [HTTP methods][method] and browsers often simply downgrade to [safe][safe] `GET`. An unpleasant aspect of going [CRUD][crud]e and [REST][rest]ful.
@@ -11,8 +11,8 @@ ___Submit___ aims to bridge this gap by performing the `<form>` submit via _[jQu
 ### Download:
 
 `jquery.submit`
-[-min.js][mini] (1.069 kb),
-[.js][source] (1.703 kb)
+[-min.js][mini] (1.067 kb),
+[.js][source] (1.696 kb)
 or the entire [.zip][zip]
 
 ---
@@ -29,7 +29,9 @@ No Javascript. Just add `"jquery-submit"` `class` to your `<form>` and use any `
 Unlike classic form submission, you don't get your response from the server directly. Instead you always get another [URL][url] address. In response to any submit, both success and error, a plain-text _response URL_ is expected. This URL needs to be resolvable with `GET`. Browser then automatically redirects to the _response URL_.
 
 
+## AJAX
 
+___Submit___ utilizes standard _jQuery_'s [.ajax][.ajax] method to deliver over the network. You can therefore use all its available settings. Assign them as properties of `$.submit.ajaxSettings` object.
 
 
 ## + Bonus
@@ -62,6 +64,14 @@ Prior to the actual form submit a `"get-submit"`, `"post-submit"`, `"put-submit"
 		return false;
 	});
 
+You may also return an object of specific settings for the [.ajax][.ajax] call. Some of them may get overriden.
+
+	$('form').bind("put-submit", function(event, form, method){
+		return {
+			beforeSend: function(){ ... }
+		}
+	});
+
 Similarly, after completion `"get"`, `"post"`, `"put"` or `"delete"` event is triggered on the `<form>` right before ___Submit___ either redirects or loads the _response URL_. Handler will accept `form`, `result` and `url` attributes. Return _false_ to prevent it from happening if you want to handle the response by yourself.
 
 
@@ -78,10 +88,10 @@ Copyright (c) 2010 [Petr Vostrel][vostrel]
 
 
 
-[version]:http://github.com/pisi/Submit/tree/v0.4
-[source]:https://github.com/pisi/Submit/raw/v0.4/source/jquery.submit.js
-[mini]:https://github.com/pisi/Submit/raw/v0.4/jquery.submit.js
-[zip]:https://github.com/pisi/Submit/archives/v0.4
+[version]:http://github.com/pisi/Submit/tree/v0.5
+[source]:https://github.com/pisi/Submit/raw/v0.5/source/jquery.submit.js
+[mini]:https://github.com/pisi/Submit/raw/v0.5/jquery.submit.js
+[zip]:https://github.com/pisi/Submit/archives/v0.5
 
 [gpl]:https://github.com/pisi/Submit/raw/master/GPL-LICENSE.txt
 [mit]:https://github.com/pisi/Submit/raw/master/MIT-LICENSE.txt

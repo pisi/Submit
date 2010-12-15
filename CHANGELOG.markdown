@@ -1,6 +1,11 @@
 ___Submit___ Changelog
 ======================
 
+## [v0.5](http://github.com/pisi/Submit/tree/v0.5)
+
+* Added a possibility to customize AJAX settings on a per-case-basis.
+
+
 ## [v0.4](http://github.com/pisi/Submit/tree/v0.4)
 
 * More eventful inside. Added method-specific events triggered on the `<form>`.
