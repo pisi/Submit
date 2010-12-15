@@ -64,19 +64,15 @@ delete '/resource' do
 end
 
 put '/path' do
-  report_success :put, params
-  redirect '/'
+  redirect report_success(:put, params)
 end
 get '/path' do
-  report_success :get, params
-  redirect '/'
+  redirect report_success(:get, params)
 end
 post '/path' do
-  report_success :post, params
-  redirect '/'
+  redirect report_success(:post, params)
 end
 delete '/path' do
-  report_success :delete, params
-  redirect '/'
+  redirect report_success(:delete, params)
 end
 
