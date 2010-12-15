@@ -36,12 +36,11 @@ jQuery.restfulForms || (function($, document){
 			},
 			submit: function(e, form, method){
 
-				$.ajax( $.extend({}, plugin.ajaxSettings, {
+				$.ajax( $.extend({}, plugin.ajaxSettings, e.result || {}, {
 					url: form.action,
 					type: method,
 					data: $(form).serialize(),
 					complete: function(xhr, status){
-						console.log(xhr)
 						$(form).trigger(method, [form, xhr.responseText, form.target, status]);
 					}}) )
 
