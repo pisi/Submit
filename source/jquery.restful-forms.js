@@ -2,7 +2,7 @@
  *
  * RESTful Forms Plug-in for jQuery
  * ================================
- * AJAX-powered support for REST methods in HTML forms
+ * Proper RESTful submit treatment for HTML <form> tags.
  *
  * @license RESTful Forms
  * for jQuery 1.3+
@@ -41,9 +41,9 @@ jQuery.restfulForms || (function($, document){
 					type: method,
 					data: $(form).serialize(),
 					complete: function(xhr, status){
+						console.log(xhr)
 						$(form).trigger(method, [form, xhr.responseText, form.target, status]);
-					}
-				}))
+					}}) )
 
 			},
 			load: function(e, form, url, target){

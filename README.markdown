@@ -80,8 +80,8 @@ Copyright (c) 2010 [Petr Vostrel][vostrel]
 
 
 [version]:http://github.com/pisi/RestfulForms/tree/v0.4
-[source]:http://github.com/pisi/RestfulForms/tree/v0.4/source/jquery.restful-forms.js
-[mini]:http://github.com/pisi/RestfulForms/tree/v0.4/jquery.restful.js
+[source]:https://github.com/pisi/RestfulForms/raw/v0.4/source/jquery.restful-forms.js
+[mini]:https://github.com/pisi/RestfulForms/raw/v0.4/jquery.restful-forms.js
 [zip]:https://github.com/pisi/RestfulForms/archives/v0.4
 
 [gpl]:https://github.com/pisi/RestfulForms/raw/master/GPL-LICENSE.txt
